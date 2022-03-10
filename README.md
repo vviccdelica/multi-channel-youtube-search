@@ -1,7 +1,7 @@
 # multi-channel-youtube-search
  Simple flask based webapp that'll let you search multiple specific YT channels for content. 
  
-Just some disclaimer:
+Just some FYI:
   
   This repo is for showcase purposes only. 
   The project is already 'finished' aka in an acceptable state with no major issues or features to be addressed.
@@ -31,6 +31,6 @@ About the project:
  Language used rationale:
    
    Python - I've been familiar with it and wanted to have some reengagement with it. Also webscraping and Python are well known together.
-   HTML & CSS - Yes.
+   HTML & CSS - Yes. I've also long forgotten how all these worked, and to be honest I re-studied alot mroe here than I did with Python, as a result the project moved slower when working the front end. 
  
 
