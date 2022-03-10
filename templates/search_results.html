@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Multi-Channel YouTube Search</title>
+    <link rel="shortcut icon" href="../static/imgs/blue-play.png">
+    <link href="../static/search_results.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allan&family=Arvo&family=Courier+Prime&family=Major+Mono+Display&family=Poppins&family=Staatliches&family=Xanh+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main id="main">
+        <!-- INPUTS -->
+        {% for x in channels %}
+        <input type="radio" name="channel-radio" id="radio-{{loop.index}}" checked>
+        {% endfor %}
+
+        <div class="top-cover"></div> <!-- covers video list when scrolling up -->
+        <!-- SECTION A | CHANNEL SELECT -->
+        <section id="section-A" class="grid">
+            <div id="channels-wrap" class="content-wrap">
+                <div class="labels-wrap">
+                    {% for x in channels %}
+                    <label for="radio-{{loop.index}}" class="label-{{loop.index}}">
+                        <!-- <a href="#"> -->
+                        <img src="{{x[2]}}" alt="">
+                        <!-- </a> -->
+                    </label>
+                    {% endfor %}
+                </div>
+    
+                <div class="channel-info-wrap">
+                    {% for x in channels %}
+                    <div class="content content-{{loop.index}}">
+                        <div class="channel-thumbnail">
+                            <a href="https://www.youtube.com/channel/{{x[1]}}" target="_blank"><img src="{{x[2]}}" alt="{{x[0]}}"></a>
+                        </div>
+                        <div class="channel-info">
+                            <a href="https://www.youtube.com/channel/{{x[1]}}" target="_blank"><h4>{{x[0]}}</h4></a>
+<!-- ADD TOOLTIP            <span class="channel-tooltip">{{x[0]}}</span> -->
+                            <p>{{x[3]}}</p>
+                            <p>{{x[4]}}</p>
+                        </div>
+                    </div> 
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION B | VIDEO RESULTS -->
+        <section id="section-B" class="grid">
+            <div id="videos-wrap" class="content-wrap">
+                {% for x in videoresults %}
+                    <div class="video video-{{loop.index}}">
+                        <!-- <h4>{{x["channel_name"]}}</h4> -->
+                        <div class="results-header">
+                            <div class="video-query">
+                                <a href="{{x['channel_url']}}/search?query={{user_input}}" target="_blank">
+                                ｢ {{user_input | safe}} ｣
+                                </a>
+                            </div>
+                            search results:
+                            <!-- <div class="video-query">"apexxx asdas dasdasdas asdasd"</div>
+                            <p>
+                                <a href="{{x['channel_url']}}/search?query=apex" target="_blank">
+                                search results:
+                                </a>
+                            </p> -->
+                        </div>
+                        <div class="video-list">
+                            {% if x["videos_found"] %}
+                                {% for z in x["videos_found"] %}
+                                <div class="video-card">
+                                    <!-- <p>{{z[0]}}</p> -->
+                                    <div class="video-thumbnail">
+                                        <div class="image">
+                                            <a href="https://www.youtube.com/watch?v={{z[1]}}" target="_blank"><img src="{{z[2]}}" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="video-info">
+                                        <div class="video-title">
+                                            <a href="https://www.youtube.com/watch?v={{z[1]}}" target="_blank">
+                                            {{z[0]}}
+                                            </a>
+                                        </div>
+                                        <p>{{z[3]}} ● {{z[4]}}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="no-videos">
+                                    This channel has no content that matched <b>"{{user_input | safe}}"</b>.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div> 
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- SECTION C | SEARCH AGAIN -->
+<!-- CAN ADD FEATURE: TEXT BOX to search selected channels AGAIN -------------------------------------------->
+        <section id="section-C" class="grid">
+            <div id="ending-wrap" class="content-wrap">
+                <form action="{{url_for('home')}}" name="clear_channels">
+                <!-- <form action="{{url_for('home')}}" name="clear_channels"> -->
+                    <button type="submit"> New Search </button>
+                </form>
+            </div>
+        </section>
+        <!-- FOOTER -->
+    </main>
+    <footer id="main-footer" class="grid">
+        <div class="footer-content">
+            <p>about this project:<br>
+            <a href="">abstract</a><br>
+            <a href="">source-code</a>
+            </p>
+        </div>
+        <div class="footer-content">
+            <p>Vic Moses S. Delica:<br>
+            <a href="">curriculum-vitae</a><br>
+            <a href="">LinkedIn</a>
+            </p>
+        </div>
+      </footer>
+</body>
+</html>

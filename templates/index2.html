@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Multi-Channel Youtube Search</title>
+    <link href="../static/main.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/imgs/blue-play.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allan&family=Courier+Prime&family=Major+Mono+Display&family=Poppins&family=Staatliches&family=Xanh+Mono&display=swap" rel="stylesheet"> 
+</head>
+<body>
+<!-- HEADER -->
+    <header id="description" class="grid">
+        <div class="content-wrap">
+            <div class="title">
+                <a href=""> ｢ a simple WebApp ｣</a>
+            </div>
+            <p>Search from multiple specific YouTube
+            <br>channels all at once with already existing
+            <br>search functions and webscraping them. 
+            </p>
+        </div>
+    </header>
+<!-- MAIN -->
+    <main id="main">
+    <!-- Section A | Channel Search Input -->
+        <section id="section-a" class="grid">
+            <div class="content-wrap">
+                <h4 class="content-title">step1: channel search.</h4>
+                <form action="{{url_for('home')}}" method="POST">
+                    {% if disable_input %}
+                        <input type="text" title="Just think of as if you're searching on YouTube" placeholder="Search for Channels" name="input_box_channel" disabled>
+                    {% else %}
+                        <input type="text" title="Just think of as if you're searching on YouTube" placeholder="Search for Channels" name="input_box_channel">
+                    {% endif %}
+                    <br>
+                     <div class="emptyinputmessage">
+                        {{emptymessage_ch | safe}}
+                     </div>
+                    {% if disable_input %}
+                        <button type="submit" disabled> Submit </button>
+                    {% else %}
+                        <button type="submit"> Submit </button>
+                    {% endif %}
+                    <br>
+                </form>
+            </div>
+        </section>
+    <!-- Section B | Channel Search Results -->
+        <section id="section-b" class="grid">
+            {% if show_section_B %} 
+            <div class="content-wrap">
+                <h4 class="content-title">step2: choose one.</h4>
+                <form action="{{url_for('home')}}" method="POST">
+                    <ul>
+                    <!--for loop START here -->
+                    {% for x in channelresults %}
+                        <li>
+                        <div class="card">
+                            <div class="card-content">
+                                <!--<a href={{"https://www.youtube.com/channel/{}".format(x[1])}} target="_blank"></a>-->
+                                <input type="radio" id="{{x[0]}}" name="channelradio" value="{{x[0]}}" checked="checked">
+                                <label for="{{x[0]}}" class="radio">
+                                    <img src="https:{{x[2]}}" alt="">
+                                    <p><b>{{x[0]}}</b><br>
+                                    {{x[3]}}</p>
+                                </label>
+                            </div>
+                        </div>
+                        </li>
+                    <!--for loop END here -->
+                    {% endfor %}
+                    </ul>
+                    <button type="submit"> Add Selected Channel </button>
+                </form>
+            </div>
+            {% endif %} 
+        </section>
+    <!-- Section C | Channels Picked -->
+        <section id="section-c" class="grid">
+            <!-- SECTION C.1 | Radio Form for CHannel Select -->
+            {% if show_section_C %} 
+            <div class="content-wrap">
+                <h4 class="content-title">channels to search:</h4>
+                <ul>
+                    <!--for loop START here -->
+                    {% for x in selectedchannels %}
+                        <li>
+                            <!-- <div class="card"> -->
+                                <!-- <div class="card-content"> -->
+                                    <img src={{x[2]}} alt="">
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        </li>
+                    {% endfor %}
+                    <!--for loop END here -->
+                </ul>
+                    <form action="{{url_for('home')}}" name="clear_channels">
+                        <button type="submit"> Clear Selection </button>
+                    </form>
+            </div>
+            {%endif%}
+        </section>
+    <!-- Section D | Video Search -->
+        <section id="section-d" class="grid">
+            {% if show_section_D %}
+            <div class="content-wrap">
+                    <div class="content-header">
+                        <h4 class="content-title">step3: video search.</h4>
+                        <p>(step1: add more channels.) </p>
+                    </div>
+                    <form action="{{url_for('video_submit')}}" method="POST">
+                        <input type="text" title="Be more specific more better results." placeholder="Search for Videos" name="input_box_video">
+                        <div class="emptyinputmessage">
+                            {{emptymessage_vid | safe}}
+                         </div>
+                        <button type="submit"> Submit </button>
+                    </form>
+            </div>
+            {%endif%}
+        </section>
+    </main>
+<!-- FOOTER -->
+    <footer id="main-footer" class="grid">
+        <div class="footer-content">
+            <p>about this project:<br>
+            <a href="">abstract</a><br>
+            <a href="">source-code</a>
+            </p>
+        </div>
+        <div class="footer-content">
+            <p>Vic Moses S. Delica:<br>
+            <a href="">curriculum-vitae</a><br>
+            <a href="">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
