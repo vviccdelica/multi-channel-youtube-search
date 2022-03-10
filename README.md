@@ -16,11 +16,11 @@ About the project:
    I am currently trying to pursue programming, and to brush up on my rusted skills I wanted to start some small project. 
    What I also am is an avid Youtube user. I encountered times when I want to look up certain content from multiple channels and found it tedious.
    One example of this is looking up the recent Steam Deck reviews that were uploaded ONLY by channels I trust.
-   With current Youtube features, I can only go to each channel one by one and search within the channel for 'Steam Deck'
+   With current Youtube features, I can only go to each channel one by one and search within the channel for 'Steam Deck'.
    A more compelling use case is when looking up streamed content from streamers, specifically V-Tubers. (which is one of my go-to entertainment)
    I load up pages of specific V-Tuber channels one by one and search 'GTA V' just to find out which of these channels I specifically wanted to search for have streamed GTA V in the past. There are tons of V-Tuber channels out there and I simply can't rely on default Youtube search function.
 
- How I decided to tackle to problem:
+ How I decided to tackle the problem:
    
    Webscraping Youtube itself. 
    Through a webapp, utilize already existing search functions of Youtube and simplifying the process of searching multiple specific channels.
