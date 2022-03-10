@@ -2,6 +2,7 @@
  Simple flask based webapp that'll let you search multiple specific YT channels for content. 
  
 Just some disclaimer:
+  
   This repo is for showcase purposes only. 
   The project is already 'finished' aka in an acceptable state with no major issues or features to be addressed.
   There certainly are still improvements to be done but will not be undertaken at this time. 
@@ -11,6 +12,7 @@ Just some disclaimer:
 About the project:
  
  Abstract:
+   
    I am currently trying to pursue programming, and to brush up on my rusted skills I wanted to start some small project. 
    What I also am is an avid Youtube user. I encountered times when I want to look up certain content from multiple channels and found it tedious.
    One example of this is looking up the recent Steam Deck reviews that were uploaded ONLY by channels I trust.
@@ -19,11 +21,13 @@ About the project:
    I load up pages of specific V-Tuber channels one by one and search 'GTA V' just to find out which of these channels I specifically wanted to search for have streamed GTA V in the past. There are tons of V-Tuber channels out there and I simply can't rely on default Youtube search function.
 
  How I decided to tackle to problem:
+   
    Webscraping Youtube itself. 
    Through a webapp, utilize already existing search functions of Youtube and simplifying the process of searching multiple specific channels.
    End product will be deployed an a free hosting webapp service - in this case pythonanywhere.com
 
  Language used rationale:
+   
    Python - I've been familiar with it and wanted to have some reengagement with it. Also webscraping and Python are well known together.
    HTML & CSS - Yes.
  
