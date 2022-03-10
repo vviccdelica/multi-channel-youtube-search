@@ -1,8 +1,6 @@
 # multi-channel-youtube-search
  Simple flask based webapp that'll let you search multiple specific YT channels for content. 
  
- end product here: http://bluestreak.pythonanywhere.com/
- 
 Just some disclaimer:
   
   This repo is for showcase purposes only. 
@@ -10,6 +8,8 @@ Just some disclaimer:
   There certainly are still improvements to be done but will not be undertaken at this time. 
   If you've stumbled upon here randomly, of course feedback is welcome, and also just some looking around.
   I know you see by now how amateur all this is because I still am just an amateur. 
+  
+  end product here: http://bluestreak.pythonanywhere.com/
   
 About the project:
  
