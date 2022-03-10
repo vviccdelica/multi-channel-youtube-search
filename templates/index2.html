@@ -58,12 +58,10 @@
                 <h4 class="content-title">step2: choose one.</h4>
                 <form action="{{url_for('home')}}" method="POST">
                     <ul>
-                    <!--for loop START here -->
                     {% for x in channelresults %}
                         <li>
                         <div class="card">
                             <div class="card-content">
-                                <!--<a href={{"https://www.youtube.com/channel/{}".format(x[1])}} target="_blank"></a>-->
                                 <input type="radio" id="{{x[0]}}" name="channelradio" value="{{x[0]}}" checked="checked">
                                 <label for="{{x[0]}}" class="radio">
                                     <img src="https:{{x[2]}}" alt="">
@@ -73,7 +71,6 @@
                             </div>
                         </div>
                         </li>
-                    <!--for loop END here -->
                     {% endfor %}
                     </ul>
                     <button type="submit"> Add Selected Channel </button>
@@ -88,17 +85,11 @@
             <div class="content-wrap">
                 <h4 class="content-title">channels to search:</h4>
                 <ul>
-                    <!--for loop START here -->
                     {% for x in selectedchannels %}
                         <li>
-                            <!-- <div class="card"> -->
-                                <!-- <div class="card-content"> -->
-                                    <img src={{x[2]}} alt="">
-                                <!-- </div> -->
-                            <!-- </div> -->
+                            <img src={{x[2]}} alt="">
                         </li>
                     {% endfor %}
-                    <!--for loop END here -->
                 </ul>
                     <form action="{{url_for('home')}}" name="clear_channels">
                         <button type="submit"> Clear Selection </button>

@@ -27,9 +27,7 @@
                 <div class="labels-wrap">
                     {% for x in channels %}
                     <label for="radio-{{loop.index}}" class="label-{{loop.index}}">
-                        <!-- <a href="#"> -->
                         <img src="{{x[2]}}" alt="">
-                        <!-- </a> -->
                     </label>
                     {% endfor %}
                 </div>
@@ -65,18 +63,11 @@
                                 </a>
                             </div>
                             search results:
-                            <!-- <div class="video-query">"apexxx asdas dasdasdas asdasd"</div>
-                            <p>
-                                <a href="{{x['channel_url']}}/search?query=apex" target="_blank">
-                                search results:
-                                </a>
-                            </p> -->
                         </div>
                         <div class="video-list">
                             {% if x["videos_found"] %}
                                 {% for z in x["videos_found"] %}
                                 <div class="video-card">
-                                    <!-- <p>{{z[0]}}</p> -->
                                     <div class="video-thumbnail">
                                         <div class="image">
                                             <a href="https://www.youtube.com/watch?v={{z[1]}}" target="_blank"><img src="{{z[2]}}" alt=""></a>
@@ -108,7 +99,6 @@
         <section id="section-C" class="grid">
             <div id="ending-wrap" class="content-wrap">
                 <form action="{{url_for('home')}}" name="clear_channels">
-                <!-- <form action="{{url_for('home')}}" name="clear_channels"> -->
                     <button type="submit"> New Search </button>
                 </form>
             </div>

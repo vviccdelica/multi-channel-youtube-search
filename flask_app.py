@@ -12,8 +12,9 @@ video_limit = 5
 channel_limit = 3
 
 def channel_search(channel_text): 
-#-- returns (2): (1) LIST of channel info if there are YT channels found, (2) None if no channels found
-    for x in ["", " channel"," ch"," TV"]: #sometimes YT search doesn't return channel name even if EXACT channel name (that has japanese text) is inputted 
+#-- returns (2): (1) LIST of channel info of all matching results if there are YT channels found, (2) None if no channels found
+
+    for x in ["", " channel"," ch"," TV"]: #sometimes YT search doesn't return desired channel name even if EXACT channel name (that has japanese text) is inputted 
         search_query_ch = requests.get("https://www.youtube.com/results?search_query={}".format(channel_text + x))
         html_chunk_ch = BeautifulSoup(search_query_ch.content,"html.parser")
         find_channelRenderer = [x for x in html_chunk_ch.find_all("script") if 'channelRenderer' in str(x)]
@@ -47,7 +48,7 @@ def channel_search(channel_text):
     return zipped
 
 def video_search(channel_id, video_text):
-#-- returns (2): (1) DICTIONARY of video info if there are videos found, (2) None if no videos found
+#-- returns (2): (1) DICTIONARY of one channel and multiple video info if there are videos found, (2) None if no videos found
     search_query = requests.get("https://www.youtube.com/channel/{}/search?query={}".format(channel_id,video_text))
     html_chunk = BeautifulSoup(search_query.content,"html.parser")
     find_videoRenderer = [x for x in html_chunk.find_all("script") if 'videoRenderer' in str(x)]
@@ -61,8 +62,9 @@ def video_search(channel_id, video_text):
 
         channel = final_json["microformat"]["microformatDataRenderer"]["title"]
         channel_url = final_json["microformat"]["microformatDataRenderer"]["urlCanonical"] #contains actual url with 'https://www.youtube.com.....
-        #videos_found contents:
         """
+        videos_found contents:
+
         title          【APEX】あくたんに守られたいあぺ【ホロライブ / 星街すいせい】', 
         video id       'Razjoh7c_Ek', 
         thumbnail url  'https://i.ytimg.com/vi/Razjoh7c_Ek/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDCnW5XmScEHaIv-_xiQffd5cN7Xg',
@@ -92,12 +94,6 @@ def video_search(channel_id, video_text):
     else:
         return None #No content from channel_id matched video_text
 
-def selected_channel_state(x):
-    if x:
-        return True
-    else:
-        return False
-
 @app.route('/', methods=['GET','POST'])
 def home():
     if request.method == "POST":
@@ -107,7 +103,6 @@ def home():
                 if channel_input != '':
                     search_results_ch = channel_search(channel_input)
                     if search_results_ch != None:
-                        #channel_names = [x[0] for x in search_results_ch]
                         return render_template("index2.html", channelresults = search_results_ch, selectedchannels = selected_channel, show_section_B = True, show_section_C = selected_channel, show_section_D = selected_channel)
                     #show:
                         #section B
@@ -160,7 +155,6 @@ def home():
 def video_submit():
     video_input = request.form["input_box_video"]
     if video_input != '':
-        #for x,y in [z for z in selected_channel]:
         for x in [z for z in selected_channel]:
             n = random.random() + 2
             sleep(n)
@@ -169,7 +163,6 @@ def video_submit():
                 video_search_results.append(video_search(x[1], video_input))
             else:
                 video_search_results.append({"channel_name":x[0],"channel_url":f"https://www.youtube.com/channel/{x[1]}","videos_found":None})
-        #print(video_search_results)
         return render_template("search_results.html", videoresults = video_search_results, channels = selected_channel, user_input = video_input)
     else:
         return render_template("index2.html", selectedchannels = selected_channel, emptymessage_vid = "Invalid input.", show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
