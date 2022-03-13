@@ -148,6 +148,10 @@ def video_submit():
     else:
         return render_template("index2.html", selectedchannels = selected_channel, emptymessage_vid = "Invalid input.", show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
 
+@app.route('/resume')
+def resume():
+    return render_template('resume.html')
+
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
     app.run()
