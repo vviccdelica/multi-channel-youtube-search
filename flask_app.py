@@ -94,58 +94,39 @@ def video_search(channel_id, video_text):
     else:
         return None #No content from channel_id matched video_text
 
+def selected_channel_state(x):
+    if x:
+        return True
+    else:
+        return False
+
 @app.route('/', methods=['GET','POST'])
 def home():
     if request.method == "POST":
         if "input_box_channel" in request.form:
             channel_input = request.form["input_box_channel"]
-            if len(selected_channel) < channel_limit:
+            if len(selected_channel) < 5:
                 if channel_input != '':
                     search_results_ch = channel_search(channel_input)
                     if search_results_ch != None:
-                        return render_template("index2.html", channelresults = search_results_ch, selectedchannels = selected_channel, show_section_B = True, show_section_C = selected_channel, show_section_D = selected_channel)
-                    #show:
-                        #section B
-                        #section C if not emtpy
-                        #section D if selected_channel not empty
+                        return render_template("index2.html", channelresults = search_results_ch, selectedchannels = selected_channel, show_section_B = True, show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
                     else:
-                        return render_template("index2.html", emptymessage_ch = "No channel found. Please try again.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
-                    #show:
-                        #section C if not emtpy
-                        #section D if selected_channel not empty
-                    #hide:
-                        #section B
+                        return render_template("index2.html", emptymessage_ch = "No channel found. Please try again.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
                 else:
-                    return render_template("index2.html", emptymessage_ch = "Invalid input.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
+                    return render_template("index2.html", emptymessage_ch = "Invalid input.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
             else:
-                return render_template("index2.html", emptymessage_ch = f"For this is just a demo, selection is limited to {channel_limit} channels. Please proceed to video search.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel, disable_input = True)       
-                #show:
-                    #section C if not emtpy
-                    #section D if selected_channel not empty
-                #hide:
-                    #section B
-                #return render_template("index2.html", emptymessage_ch = "Since this is just a demo, channel selection only limited to 5. Please proceed to video search.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
+                return render_template("index2.html", emptymessage_ch = "For this is just a demo, selection is limited to 5 channels. Please proceed to video search.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel), disable_input = True)       
         elif "channelradio" in request.form:
             channel_selected = request.form["channelradio"]
             if channel_selected in [x[0] for x in selected_channel]:
-                return render_template("index2.html", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
-                #show:
-                    #section C if selected_channel not empty
-                    #section D if selected_channel not empty
-                #hide:
-                    #section B
+                return render_template("index2.html", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
             else:
                 channel_info = channel_search(channel_selected)
-                if len(selected_channel) < channel_limit:
+                if len(selected_channel) < 5:
                     selected_channel.append([x for x in channel_info[0]])
-                    return render_template("index2.html", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
+                    return render_template("index2.html", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
                 else:
-                    return render_template("index2.html", emptymessage_ch = f"For this is just a demo, selection is limited to {channel_limit} channels. Please proceed to video search.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel, disable_input = True)
-                #show:
-                    #section C if selected_channel not empty
-                    #section D if selected_channel not empty
-                #hide:
-                    #section B
+                    return render_template("index2.html", emptymessage_ch = "For this is just a demo, selection is limited to 5 channels. Please proceed to video search.", selectedchannels = selected_channel, show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel), disable_input = True)
     else:
         selected_channel.clear()
         video_search_results.clear()
@@ -165,12 +146,7 @@ def video_submit():
                 video_search_results.append({"channel_name":x[0],"channel_url":f"https://www.youtube.com/channel/{x[1]}","videos_found":None})
         return render_template("search_results.html", videoresults = video_search_results, channels = selected_channel, user_input = video_input)
     else:
-        return render_template("index2.html", selectedchannels = selected_channel, emptymessage_vid = "Invalid input.", show_section_B = False , show_section_C = selected_channel, show_section_D = selected_channel)
-        #show:
-            #section C if selected_channel not empty
-            #section D if selected_channel not empty
-        #hide:
-            #section B
+        return render_template("index2.html", selectedchannels = selected_channel, emptymessage_vid = "Invalid input.", show_section_B = False , show_section_C = selected_channel_state(selected_channel), show_section_D = selected_channel_state(selected_channel))
 
 if __name__ == "__main__":
     app.debug = True
