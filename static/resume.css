@@ -21,7 +21,7 @@ body {
   
 .grid {
     display: grid;
-    grid-template-columns: 1fr repeat(2, minmax(auto,13em)) 1fr;
+    grid-template-columns: 1fr repeat(2, minmax(auto,11em)) 1fr;
 }
 
 .content-wrap {
@@ -53,13 +53,13 @@ a {
 
 #header .content-wrap .pfp img {
     display: block;
-    width: 120px;
+    width: 105px;
     height: auto;
-    /* box-shadow: 0 0 10px 3px #272727; */
     border-radius: 60px;
     border: 2px solid #f0f0f0;
-    outline: 2px solid #272727;
-    box-shadow: 3px 3px black;
+    box-shadow: 
+        0px 0px 0px 2px #272727,
+        3px 3px black;
 }
 
 #header .content-wrap .personal-info {
@@ -72,13 +72,9 @@ a {
 }
 
 #header .content-wrap .personal-info .name {
-    /* background-color: #d3d3d3; */
-    /* color: #272727; */
     color: black;
-    /* background-color: white;
-    box-shadow: 3px 3px #303030; */
     font-family: 'Bebas Neue', cursive;
-    font-size: 2.35em;
+    font-size: 1.8em;
     font-weight: bold;
     text-align: center;
     margin-top: -10px;
@@ -145,16 +141,10 @@ a {
 
 #section-A .credentials .cred-title {
     display: inline-block;
-    font-family: 'Courier Prime', monospace;
-    font-weight: bold;
-    /* background-color: #272727;
-    color: #08c5d1; */
-    /* background-color: #3a506b; */
-    background-color: black;
-    color: #f0f0f0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5em;
+    color: black;
     border-radius: 10px;
-    padding: 5px;
-    /* text-shadow: 2px 2px #08c5d1; */
 }
 
 #section-A #education .cred-title {
@@ -166,25 +156,12 @@ a {
 }
 
 #section-A #skills .cred-title{
-    /* color:#272727;
-    background-color: #08c5d1; */
-    /* color:#3a506b;
-    background-color: #f0f0f0; */
-    /* border: 3px solid #929292; */
-    background-color: #929292;
-    color: black;
+    color: #f0f0f0;
 }
 
 #section-A #skills {
     background-color: #272727;
     color:#f0f0f0;
-    /* 
-    colored settings:
-
-    margin-top: -5px;
-    margin-bottom: -5px;
-    padding: 5px 0; 
-    */
     border-top: 5px solid #272727;
     margin-top: -4px;
     border-radius: 15px;
@@ -192,7 +169,6 @@ a {
 
 #section-A .sub-text {
     font-size: 0.8em;
-    /* color: #ff0072; */
     color:#929292;
     font-family: 'Courier Prime', monospace;
 }
@@ -211,12 +187,10 @@ a {
 
 #section-A .sub-text p span{
     padding: 0 3px;
-    /* background-color: #929292; */
     background-color: black;
 }
 
 #section-A #education ul li:first-child {
-    /* border: 2px dashed #08c5d1; */
     border: 3px dashed black;
     border-radius: 12px;
     margin-left:3px;
@@ -227,17 +201,19 @@ a {
     display: inline-block;
     font-family: 'Courier Prime', monospace;
     font-weight: bold;
-    font-size:1.3em;
+    font-size:1.15em;
     color: #e0e1dd;
     text-shadow: 2px 2px #272727;
     padding: 0 0 5px 0;
 }
 
 #section-A #education ul li:first-child .grad span{
-    /* background-color: #ff0072;
-    box-shadow: 2px 2px #08c5d1; */
     background-color: #3a506b;
     box-shadow: 2px 2px #272727;
+}
+
+#section-A #education ul li:first-child p {
+    font-size: 0.9em;
 }
 
 #section-A #education ul li:first-child .sublist {
@@ -258,7 +234,6 @@ a {
 }
 
 #section-A #education ul li .sublist .label{
-    /* color:#08c5d1; */
     color:#272727;
     font-weight: bold;
     display: flex;
@@ -286,7 +261,9 @@ a {
 #footer .content-wrap {
     margin-top: 20px;
     border: 2px solid #3a506b;
-    outline: 4px solid #272727;
+    box-shadow: 
+        0px 0px 0px 4px #272727,
+        3px 3px black;
     display: flex;
     justify-content: center;
     align-items: center;
