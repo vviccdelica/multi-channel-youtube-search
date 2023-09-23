@@ -1,5 +1,7 @@
 # multi-channel-youtube-search
- Simple flask based webapp that'll let you search multiple specific YT channels for content. 
+!! FREE HOSTING ENDED. WebApp currently inaccessible 
+
+Simple flask based webapp that'll let you search multiple specific YT channels for content. 
 
 Disclaimer: 
 
